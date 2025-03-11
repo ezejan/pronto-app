@@ -14,26 +14,27 @@
         <h1 class="text-2xl font-bold mb-4 text-center">Pronto</h1>
         <p class="text-center text-gray-600 mb-6">Pedí lo que necesitás y recibí presupuestos inmediatos.</p>
 
-        <form action="https://docs.google.com/forms/d/e/TU_LINK_DE_GOOGLE_FORMS/viewform" method="POST">
-            
+        <!-- FORMULARIO CONECTADO A GOOGLE FORMS -->
+        <form action="TU_LINK_DE_GOOGLE_FORMS" method="POST" target="_blank">
+
             <label for="rubro">Seleccioná un Rubro:</label>
-            <select id="rubro" name="rubro" class="w-full p-3 rounded-xl border border-gray-300" onchange="actualizarEspecialidades()">
+            <select id="rubro" name="entry.1234567890" class="w-full p-3 rounded-xl border border-gray-300" onchange="actualizarEspecialidades()">
                 <option value="">Seleccioná rubro</option>
-                <option value="hogar">Servicios para el hogar</option>
-                <option value="transporte">Transporte y logística</option>
-                <option value="compra">Compra y venta</option>
-                <option value="almacenamiento">Almacenamiento y depósito</option>
-                <option value="otros">Otros servicios</option>
+                <option value="Servicios para el hogar">Servicios para el hogar</option>
+                <option value="Transporte y logística">Transporte y logística</option>
+                <option value="Compra y venta">Compra y venta</option>
+                <option value="Almacenamiento y depósito">Almacenamiento y depósito</option>
+                <option value="Otros servicios">Otros servicios</option>
             </select>
 
             <label for="especialidad">Seleccioná una Especialidad:</label>
-            <select id="especialidad" name="especialidad" class="w-full p-3 rounded-xl border border-gray-300">
+            <select id="especialidad" name="entry.0987654321" class="w-full p-3 rounded-xl border border-gray-300">
                 <option value="">Seleccioná especialidad</option>
             </select>
 
-            <input type="text" name="ubicacion" placeholder="Ubicación Ej: Olivos, Vicente López" class="w-full p-3 rounded-xl border">
+            <input type="text" name="entry.1122334455" placeholder="Ubicación Ej: Olivos, Vicente López" class="w-full p-3 rounded-xl border">
 
-            <input type="text" name="contacto" placeholder="WhatsApp o email de contacto" class="w-full p-3 rounded-xl border-2 border-green-400">
+            <input type="text" name="entry.5566778899" placeholder="WhatsApp o email de contacto" class="w-full p-3 rounded-xl border-2 border-green-400">
 
             <button type="submit" class="w-full p-3 bg-green-500 text-white rounded-xl font-bold hover:bg-green-600 transition-colors">
                 ENVIAR PEDIDO ⚡️
@@ -52,17 +53,17 @@
             especialidadSelect.innerHTML = ""; // Vaciar opciones anteriores
 
             var opciones = {
-                hogar: ["Electricista", "Gasista", "Plomero", "Cerrajero", "Pintor", "Carpintero", "Servicio Técnico de Electrodomésticos"],
-                transporte: ["Fletero", "Mudanzas", "Mensajería y envíos rápidos"],
-                compra: ["Compra Mayorista", "Venta al por mayor", "Distribuidores de productos"],
-                almacenamiento: ["Alquiler de depósitos", "Guarda muebles", "Fulfillment y logística de e-commerce"],
-                otros: ["Mantenimiento general", "Limpieza profesional", "Servicios de jardinería", "Asistencia informática", "Reparación de vehículos/motos"]
+                "Servicios para el hogar": ["Electricista", "Gasista", "Plomero", "Cerrajero", "Pintor", "Carpintero", "Servicio Técnico de Electrodomésticos"],
+                "Transporte y logística": ["Fletero", "Mudanzas", "Mensajería y envíos rápidos"],
+                "Compra y venta": ["Compra Mayorista", "Venta al por mayor", "Distribuidores de productos"],
+                "Almacenamiento y depósito": ["Alquiler de depósitos", "Guarda muebles", "Fulfillment y logística de e-commerce"],
+                "Otros servicios": ["Mantenimiento general", "Limpieza profesional", "Servicios de jardinería", "Asistencia informática", "Reparación de vehículos/motos"]
             };
 
             if (rubro in opciones) {
                 opciones[rubro].forEach(function (especialidad) {
                     var nuevaOpcion = document.createElement("option");
-                    nuevaOpcion.value = especialidad.toLowerCase();
+                    nuevaOpcion.value = especialidad;
                     nuevaOpcion.textContent = especialidad;
                     especialidadSelect.appendChild(nuevaOpcion);
                 });
