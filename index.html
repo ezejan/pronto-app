@@ -1,75 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pronto - Pedidos rápidos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body class="bg-gray-100 p-4">
-
-    <div class="max-w-xl mx-auto bg-white shadow-lg rounded-2xl p-6">
-        <h1 class="text-2xl font-bold mb-4 text-center">Pronto</h1>
-        <p class="text-center text-gray-600 mb-6">Pedí lo que necesitás y recibí presupuestos inmediatos.</p>
-
-        <!-- FORMULARIO CONECTADO A GOOGLE FORMS -->
-        <form action="https://docs.google.com/forms/d/e/1FAIpQLSeT_QUB5-GzxBytzVFsdRO3aJyAhwoEeKiwqstqjirPescWTg/formResponse" method="POST" target="_blank">
-
-            <label for="rubro">Seleccioná un Rubro:</label>
-            <select id="rubro" name="entry.74994910" class="w-full p-3 rounded-xl border border-gray-300" onchange="actualizarEspecialidades()">
-                <option value="">Seleccioná rubro</option>
-                <option value="SERVICIOS PARA EL HOGAR">Servicios para el hogar</option>
-                <option value="TRANSPORTE Y LOGÍSTICA">Transporte y logística</option>
-                <option value="COMPRA Y VENTA">Compra y venta</option>
-                <option value="ALMACENAMIENTO Y DEPÓSITO">Almacenamiento y depósito</option>
-                <option value="OTROS SERVICIOS">Otros servicios</option>
-            </select>
-
-            <label for="especialidad">Seleccioná una Especialidad:</label>
-            <select id="especialidad" name="entry.560237302" class="w-full p-3 rounded-xl border border-gray-300">
-                <option value="">Seleccioná especialidad</option>
-            </select>
-
-            <input type="text" name="entry.1186183198" placeholder="Ubicación Ej: Olivos, Vicente López" class="w-full p-3 rounded-xl border">
-
-            <input type="text" name="entry.554881079" placeholder="WhatsApp o email de contacto" class="w-full p-3 rounded-xl border-2 border-green-400">
-
-            <button type="submit" class="w-full p-3 bg-green-500 text-white rounded-xl font-bold hover:bg-green-600 transition-colors">
-                ENVIAR PEDIDO ⚡️
-            </button>
-        </form>
-
-        <p class="text-xs text-gray-500 mt-4 text-center">
-            Al enviar tu pedido, los proveedores disponibles recibirán una alerta inmediata para cotizarte.
-        </p>
-    </div>
-
+    <title>Pronto - Redirigiendo...</title>
     <script>
-        function actualizarEspecialidades() {
-            var rubro = document.getElementById("rubro").value;
-            var especialidadSelect = document.getElementById("especialidad");
-            especialidadSelect.innerHTML = ""; // Vaciar opciones anteriores
-
-            var opciones = {
-                "SERVICIOS PARA EL HOGAR": ["Electricista", "Gasista", "Plomero", "Cerrajero", "Pintor", "Carpintero", "Servicio Técnico de Electrodomésticos"],
-                "TRANSPORTE Y LOGÍSTICA": ["Fletero", "Mudanzas", "Mensajería y envíos rápidos"],
-                "COMPRA Y VENTA": ["Compra Mayorista", "Venta al por mayor", "Distribuidores de productos"],
-                "ALMACENAMIENTO Y DEPÓSITO": ["Alquiler de depósitos", "Guarda muebles", "Fulfillment y logística de e-commerce"],
-                "OTROS SERVICIOS": ["Mantenimiento general", "Limpieza profesional", "Servicios de jardinería", "Asistencia informática", "Reparación de vehículos/motos"]
-            };
-
-            if (rubro in opciones) {
-                opciones[rubro].forEach(function (especialidad) {
-                    var nuevaOpcion = document.createElement("option");
-                    nuevaOpcion.value = especialidad;
-                    nuevaOpcion.textContent = especialidad;
-                    especialidadSelect.appendChild(nuevaOpcion);
-                });
-            }
-        }
+        // Redirigir automáticamente a Google Forms
+        window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSeT_QUB5-GzxBytzVFsdRO3aJyAhwoEeKiwqstqjirPescWTg/viewform";
     </script>
-
+</head>
+<body>
+    <p>Si no eres redirigido automáticamente, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeT_QUB5-GzxBytzVFsdRO3aJyAhwoEeKiwqstqjirPescWTg/viewform">haz clic aquí</a>.</p>
 </body>
 </html>
