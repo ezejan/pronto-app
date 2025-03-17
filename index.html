@@ -78,7 +78,7 @@
 .then(data => {
     console.log("Respuesta del servidor:", data);
     alert("Pedido enviado con éxito!"); // Agrega esto temporalmente
-    document.getElementById("mensaje").classList.remove("hidden");
+document.getElementById("mensaje").style.display = "block";
     document.getElementById("pedidoForm").reset(); // Limpiar formulario
 })
             .catch(error => console.error("Error al enviar el formulario:", error));
