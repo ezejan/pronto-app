@@ -1,88 +1,89 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pronto - Pedidos rápidos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pronto - Pedidos rápidos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 p-4">
-    <div class="max-w-xl mx-auto bg-white shadow-lg rounded-2xl p-6">
-        <h1 class="text-2xl font-bold mb-4 text-center">Pronto</h1>
-        <p class="text-center text-gray-600 mb-6">Pedí lo que necesitás y recibí presupuestos inmediatos.</p>
+  <div class="max-w-xl mx-auto bg-white shadow-lg rounded-2xl p-6">
+    <h1 class="text-2xl font-bold mb-4 text-center">Pronto</h1>
+    <p class="text-center text-gray-600 mb-6">Pedí lo que necesitás y recibí presupuestos inmediatos.</p>
 
-        <!-- Formulario que envía datos directamente a Google Sheets vía Apps Script -->
-        <form id="pedidoForm">
-            <label for="rubro">Seleccioná un Rubro:</label>
-            <select id="rubro" name="rubro" class="w-full p-3 rounded-xl border border-gray-300" onchange="actualizarEspecialidades()">
-                <option value="">Seleccioná rubro</option>
-                <option value="Servicios para el hogar">Servicios para el hogar</option>
-                <option value="Transporte y logística">Transporte y logística</option>
-                <option value="Compra y venta">Compra y venta</option>
-                <option value="Almacenamiento y depósito">Almacenamiento y depósito</option>
-                <option value="Otros servicios">Otros servicios</option>
-            </select>
+    <!-- Formulario que envía datos directamente a Google Sheets vía Apps Script -->
+    <form id="pedidoForm">
+      <label for="rubro">Seleccioná un Rubro:</label>
+      <select id="rubro" name="rubro" class="w-full p-3 rounded-xl border border-gray-300" onchange="actualizarEspecialidades()">
+        <option value="">Seleccioná rubro</option>
+        <option value="Servicios para el hogar">Servicios para el hogar</option>
+        <option value="Transporte y logística">Transporte y logística</option>
+        <option value="Compra y venta">Compra y venta</option>
+        <option value="Almacenamiento y depósito">Almacenamiento y depósito</option>
+        <option value="Otros servicios">Otros servicios</option>
+      </select>
 
-            <label for="especialidad">Seleccioná una Especialidad:</label>
-            <select id="especialidad" name="especialidad" class="w-full p-3 rounded-xl border border-gray-300">
-                <option value="">Seleccioná especialidad</option>
-            </select>
+      <label for="especialidad">Seleccioná una Especialidad:</label>
+      <select id="especialidad" name="especialidad" class="w-full p-3 rounded-xl border border-gray-300">
+        <option value="">Seleccioná especialidad</option>
+      </select>
 
-            <input type="text" name="ubicacion" id="ubicacion" placeholder="Ubicación Ej: Olivos, Vicente López" class="w-full p-3 rounded-xl border mt-2">
+      <input type="text" name="ubicacion" id="ubicacion" placeholder="Ubicación Ej: Olivos, Vicente López" class="w-full p-3 rounded-xl border mt-2">
 
-            <input type="text" name="contacto" id="contacto" placeholder="WhatsApp o email de contacto" class="w-full p-3 rounded-xl border-2 border-green-400 mt-2">
+      <input type="text" name="contacto" id="contacto" placeholder="WhatsApp o email de contacto" class="w-full p-3 rounded-xl border-2 border-green-400 mt-2">
 
-            <button type="submit" class="w-full p-3 bg-green-500 text-white rounded-xl font-bold hover:bg-green-600 transition-colors mt-4">
-                ENVIAR PEDIDO ⚡️
-            </button>
-        </form>
+      <button type="submit" class="w-full p-3 bg-green-500 text-white rounded-xl font-bold hover:bg-green-600 transition-colors mt-4">
+        ENVIAR PEDIDO ⚡️
+      </button>
+    </form>
 
-        <p id="mensaje" class="text-center text-green-500 mt-4 hidden">✅ ¡Pedido enviado con éxito!</p>
+    <!-- Mensaje de confirmación con estilo inline para controlarlo -->
+    <p id="mensaje" style="display: none;" class="text-center text-green-500 mt-4">✅ ¡Pedido enviado con éxito!</p>
 
-        <p class="text-xs text-gray-500 mt-4 text-center">
-            Al enviar tu pedido, se guardarán los datos y se notificarán a los proveedores correspondientes.
-        </p>
-    </div>
+    <p class="text-xs text-gray-500 mt-4 text-center">
+      Al enviar tu pedido, se guardarán los datos y se notificarán a los proveedores correspondientes.
+    </p>
+  </div>
 
-    <script>
-        function actualizarEspecialidades() {
-            var rubro = document.getElementById("rubro").value;
-            var especialidadSelect = document.getElementById("especialidad");
-            especialidadSelect.innerHTML = ""; // Vaciar opciones anteriores
-            var opciones = {
-                "Servicios para el hogar": ["Electricista", "Gasista", "Plomero", "Cerrajero", "Pintor", "Carpintero", "Servicio Técnico de Electrodomésticos"],
-                "Transporte y logística": ["Fletero", "Mudanzas", "Mensajería y envíos rápidos"],
-                "Compra y venta": ["Compra Mayorista", "Venta al por mayor", "Distribuidores de productos"],
-                "Almacenamiento y depósito": ["Alquiler de depósitos", "Guarda muebles", "Fulfillment y logística de e-commerce"],
-                "Otros servicios": ["Mantenimiento general", "Limpieza profesional", "Servicios de jardinería", "Asistencia informática", "Reparación de vehículos/motos"]
-            };
-            if (rubro in opciones) {
-                opciones[rubro].forEach(function (especialidad) {
-                    var nuevaOpcion = document.createElement("option");
-                    nuevaOpcion.value = especialidad;
-                    nuevaOpcion.textContent = especialidad;
-                    especialidadSelect.appendChild(nuevaOpcion);
-                });
-            }
-        }
-
-        document.getElementById("pedidoForm").addEventListener("submit", function (e) {
-            e.preventDefault(); // Evitar recarga de la página
-            var formData = new FormData(this);
-
-            fetch("https://script.google.com/macros/s/AKfycby721rDCi3soW3BYzLzP_A2D4XVTm0_Dqb86vvNrFR75_FRDuWrbxs3ZhcWTmVMXW-bMw/exec", {  // Reemplazá este valor con la URL generada por Apps Script
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.text())
-.then(data => {
-    console.log("Respuesta del servidor:", data);
-    alert("Pedido enviado con éxito!"); // Agrega esto temporalmente
-document.getElementById("mensaje").style.display = "block";
-    document.getElementById("pedidoForm").reset(); // Limpiar formulario
-})
-            .catch(error => console.error("Error al enviar el formulario:", error));
+  <script>
+    function actualizarEspecialidades() {
+      var rubro = document.getElementById("rubro").value;
+      var especialidadSelect = document.getElementById("especialidad");
+      especialidadSelect.innerHTML = ""; // Vaciar opciones anteriores
+      var opciones = {
+        "Servicios para el hogar": ["Electricista", "Gasista", "Plomero", "Cerrajero", "Pintor", "Carpintero", "Servicio Técnico de Electrodomésticos"],
+        "Transporte y logística": ["Fletero", "Mudanzas", "Mensajería y envíos rápidos"],
+        "Compra y venta": ["Compra Mayorista", "Venta al por mayor", "Distribuidores de productos"],
+        "Almacenamiento y depósito": ["Alquiler de depósitos", "Guarda muebles", "Fulfillment y logística de e-commerce"],
+        "Otros servicios": ["Mantenimiento general", "Limpieza profesional", "Servicios de jardinería", "Asistencia informática", "Reparación de vehículos/motos"]
+      };
+      if (rubro in opciones) {
+        opciones[rubro].forEach(function(especialidad) {
+          var nuevaOpcion = document.createElement("option");
+          nuevaOpcion.value = especialidad;
+          nuevaOpcion.textContent = especialidad;
+          especialidadSelect.appendChild(nuevaOpcion);
         });
-    </script>
+      }
+    }
+
+    document.getElementById("pedidoForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // Evitar recarga de la página
+      var formData = new FormData(this);
+
+      fetch("https://script.google.com/macros/s/AKfycby721rDCi3soW3BYzLzP_A2D4XVTm0_Dqb86vvNrFR75_FRDuWrbxs3ZhcWTmVMXW-bMw/exec", {  // Reemplazá este valor con la URL generada por Apps Script
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log("Respuesta del servidor:", data);
+        // Forzamos que se muestre el mensaje
+        document.getElementById("mensaje").style.display = "block";
+        document.getElementById("pedidoForm").reset(); // Limpiar formulario
+      })
+      .catch(error => console.error("Error al enviar el formulario:", error));
+    });
+  </script>
 </body>
 </html>
